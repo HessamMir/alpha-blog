@@ -1,6 +1,6 @@
 class CreateArticles < ActiveRecord::Migration[6.0]
   def change
-    # creating a table in articles and changing it to t
+    # creating a table articles subsitute to t
     create_table :articles do |t|
       t.string :title
       t.text :description
