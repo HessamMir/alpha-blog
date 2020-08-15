@@ -49,8 +49,12 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
-group :development, :test do
+group :development do
   gem 'sqlite3'
+  gem 'web-console'
+  gem 'listen', '~> 3.0.5'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 group :production do
   gem 'pg'
