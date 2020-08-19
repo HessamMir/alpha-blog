@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  
   def show
     
   end
@@ -47,6 +48,7 @@ class ArticlesController < ApplicationController
   end
 
   private
+  
   def set_article
     
   
