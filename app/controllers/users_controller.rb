@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def show  
-    @articles = @user.articles
-    @users = User.paginate(page: params[:page], per_page: 5)
+    @articles = @user.articles.paginate(page: params[:page], per_page: 5)
     
   end
 
@@ -20,6 +19,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "welcome #{@user.username}, you have succesfully signed up!"
       redirect_to articles_path
     else
