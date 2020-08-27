@@ -13,7 +13,9 @@
               <%#  this line tells me how many articles the user has and it has a count %>
               <p class="card-text"><%= pluralize(user.articles.count, "Article") %></p>
               <%= link_to 'view profile', user_path(user),class: "btn btn-outline-info mt-2" %> </td>
-              <%= link_to 'edit profile', edit_user_path(user),class: "btn btn-success mt-2" %> </h2>
+              <% if logged_in? && user == current_user %>
+                <%= link_to 'edit profile', edit_user_path(user),class: "btn btn-success mt-2" %> </h2>
+              <% end %>
             </div>
             <div class="card-footer text-muted">
             <small> Joined <%= time_ago_in_words(user.created_at) %> ago</small>

@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
    #here i have used refactoring through these and added set:article for all the methods listed below
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before action :require_user, except: [:show, :index]
   
   def show
     
