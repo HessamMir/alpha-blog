@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+  #i have put require in the before actions so that those who dont have account wont be able to edit any page through the url
+  #i have put the require same user method there also so that only users who are logged into the account will be able to edit the same account 
 
   def show  
     @articles = @user.articles.paginate(page: params[:page], per_page: 5)
@@ -8,12 +12,10 @@ class UsersController < ApplicationController
  #here i have added the pagination again
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
-    
   end
   
   def new
     @user = User.new
-    
   end
 
   def create
@@ -49,13 +51,21 @@ end
    #here i have made sure that i refactored the user params and used it in the other methods for less writing
   def user_params
     params.require(:user).permit(:username, :email, :password)
-     #this is the code neccessary for a user to exist.
   end
   
   
-def set_user
-  @user = User.find(params[:id])
+  def set_user
+    @user = User.find(params[:id])
 
-end
+  end
+  #this is a restriction which only allows users who are logged in to have access to delete or update the account
+  def require_same_user
+    if current_user != @user
+      flash[:alert] = "you dont have access to do anything with #{@user.username}'s account"
+      redirect_to user_path(@user)
+      
+    end
+    
+  end
 
 end

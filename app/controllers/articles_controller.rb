@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
    #here i have used refactoring through these and added set:article for all the methods listed below
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before action :require_user, except: [:show, :index]
-  
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
   def show
     
   end
@@ -61,6 +61,14 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title,:description)
 
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:alert] = "you can edit or delete your own articles only"
+      redirect_to @article
+    end
+    
   end
 
 
