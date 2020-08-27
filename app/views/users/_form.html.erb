@@ -1,9 +1,10 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-10">
+    <%#  the object in this instance is user so the erros will be shown as that %>
       <%= render 'shared/errors', obj: @user %>
       <%= form_with(model: @user, class:"shadow p-3 mb-3 bg-info rounded",local: true)  do |f| %>
-        
+        <%#  each of these is a field for username password and email %>
         <div class="form-group row">
           <%= f.label :username ,class:"col-2 col-form-label text-light" %>
           <div class="col-10">
@@ -24,7 +25,7 @@
         <div class="col-10">
           <%= f.password_field :password, class:"form-control shadow rounded",placeholder:"choose a password" %>
         </div>
-      
+      <%#  need help with the user.new_record line %>
       <div class="form-group row justify-content-center">
         <%= f.submit(@user.new_record? ? "Sign Up" : "Update Account", class:"btn btn-outline-light btn-lg mt-2") %>
       </div>

@@ -1,6 +1,8 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-10">
+    <%# login which has a scope with sessions and this usually needs a url which is the login
+    path which can also be found in the root routes  %>
       <%= form_with(scope: :session, url: login_path, class:"shadow p-3 mb-3 bg-info rounded",local: true)  do |f| %>
         
 
@@ -15,10 +17,12 @@
          <div class="form-group row">
         <%= f.label :password,class:"col-2 col-form-label text-light" %>
         <div class="col-10">
+        <%# password field allows it to not be shown when written  %>
           <%= f.password_field :password, class:"form-control shadow rounded",placeholder:"Enter your Password" %>
         </div>
       
       <div class="form-group row justify-content-center">
+      <%# submit button works based on the controller  %>
         <%= f.submit "Log In", class:"btn btn-outline-light btn-lg mt-2" %>
       </div>
       <% end %>

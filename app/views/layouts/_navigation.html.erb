@@ -1,5 +1,6 @@
 <div class="navbar-dark bg-dark">
   <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <%#  this is just a normal link to the home page from ay page when alpha blog is clicked %>
     <%= link_to "Alpha Blog", root_path, class: "navbar-brand", id: "logo" %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -21,6 +22,10 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </li>
+        <%# if theres a user logged in, the current_user.username will have the username of the user written
+        down an the user_path will allow the user to be shown if the name is clicked on, 
+        the link to logout allows the user to use the destroy function which allows them to
+        log out of the session  %>
         <% if logged_in? %>
           
           <li class="nav-item">
@@ -30,7 +35,8 @@
           <li class="nav-item">
             <%= link_to "Logout", logout_path, class: "nav-link", method: :delete %>
           </li>
-       
+       <%#  here we have the else functio which will only work if there is nobody logged in,
+       it will have a login with its path and a signup with its path %>
         <% else %>
           <li class="nav-item">
             <%= link_to "Login", login_path, class: "nav-link" %>

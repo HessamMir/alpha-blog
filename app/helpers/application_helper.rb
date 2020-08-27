@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+ #here i have my gravatar and the sizes for it
   def gravatar_for(user, options = {size: 80})
     email_address = user.email.downcase
     Digest::MD5.hexdigest(email_address)

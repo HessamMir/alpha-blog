@@ -1,9 +1,12 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-10">
+    <%# the object is the class youre working with within this html page %>
       <%= render 'shared/errors', obj: @article %>
+      <%# the model is the instance variable or class which in this case is article %>
       <%= form_with(model: @article, class:"shadow p-3 mb-3 bg-info rounded",local: true)  do |f| %>
         <div class="form-group row">
+          <%# f.label is short for article label which is the title  %>
           <%= f.label :title ,class:"col-2 col-form-label text-light" %>
           <div class="col-10">
             <%= f.text_field :title, class:"form-control shadow rounded",placeholder:"Title of article" %>
@@ -11,17 +14,20 @@
         </div>
 
       <div class="form-group row">
+      <%# f.label is short for article label which is the description in this instance  %>
         <%= f.label :description,class:"col-2 col-form-label text-light" %>
         <div class="col-10">
           <%= f.text_area :description, rows:5, class:"form-control shadow rounded",placeholder:"Description of article" %>
         </div>
       </div>  
       <div class="form-group row justify-content-center">
+      <%# here we have the submit button which works according to the controller  %>
         <%= f.submit class:"btn btn-outline-light btn-lg" %>
       </div>
       <% end %>
     </div>
     <div class="mb-3">
+    <%# i have put a link here for the user to have the option to go back to the articles listing page  %>
     <%= link_to '[ Return to articles listing page ]', articles_path, class:"text-info" %>
     </div>
   </div>

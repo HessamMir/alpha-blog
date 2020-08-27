@@ -1,7 +1,9 @@
 <% if obj.errors.any? %>
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <%#  here i have put an error statement for the object class which can be article or user downcase %>
     <h4 class="alert-heading">the following errors prevented the <%= obj.class.name.downcase %> from being saved</h4>
     <ul>
+    <%# after that the object errors will be displayed in full as a list  %>
     <% obj.errors.full_messages.each do |msg| %>
     <li > <%= msg  %> </li>
     <% end %>
