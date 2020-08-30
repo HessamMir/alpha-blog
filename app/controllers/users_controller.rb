@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_user, except: [:show, :index]
   before_action :require_same_user, only: [:edit, :update, :destroy]
   #i have put require in the before actions so that those who dont have account wont be able to edit any page through the url
@@ -45,6 +45,13 @@ def update
     render 'edit'
 
   end
+end
+
+def destroy
+  @user.destroy
+  session[:user_id] = nil
+  flash[:notice] = "Account and all articles successfully deleted"
+  redirect_to articles_path
 end
 
   private 

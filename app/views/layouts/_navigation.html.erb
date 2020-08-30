@@ -39,6 +39,7 @@
             <%= link_to "view your profile", user_path(current_user),class: "dropdown-item" %>
             <%= link_to "Edit your profile", edit_user_path(current_user),class: "dropdown-item" %>
             <%= link_to "Logout", logout_path, class: "dropdown-item", method: :delete %>
+            <%= link_to "Delete your profile", user_path(current_user), class: "dropdown-item text-danger", method: :delete, data: { confirm: "are you sure?"} %>
           </div>
         </li>
        <%#  here we have the else functio which will only work if there is nobody logged in,
