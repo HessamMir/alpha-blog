@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
    #this is the many to one feature which means that many articles can belong to one user
+   #dependent means that if the user is deleted, all of the articles associated to it are also destroyed.
   has_many :articles, dependent: :destroy
   validates :username, presence: true, uniqueness: { case_sensitive: false}, length: {minimum: 3, maximum: 25} 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
