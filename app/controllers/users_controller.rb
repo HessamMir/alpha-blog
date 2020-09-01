@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, except: [:show, :index]
   before_action :require_same_user, only: [:edit, :update, :destroy]
   #i have put require in the before actions so that those who dont have account wont be able to edit any page through the url
   #i have put the require same user method there also so that only users who are logged into the account will be able to edit the same account 
@@ -49,7 +48,7 @@ end
 
 def destroy
   @user.destroy
-  session[:user_id] = nil
+  session[:user_id] = nil if @user == current_user
   flash[:notice] = "Account and all articles successfully deleted"
   redirect_to articles_path
 end
@@ -67,7 +66,7 @@ end
   end
   #this is a restriction which only allows users who are logged in to have access to delete or update the account
   def require_same_user
-    if current_user != @user
+    if current_user != @user && !current_user.admin?
       flash[:alert] = "you dont have access to do anything with #{@user.username}'s account"
       redirect_to user_path(@user)
       

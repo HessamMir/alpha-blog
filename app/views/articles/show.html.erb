@@ -17,7 +17,7 @@
               <%# if theres someone logged in and the @article.user which is the instance
               variable is = to the current user logged in only then will the user be able
               to edit or delete the article based on if it was created by them.  %>
-              <% if logged_in? && @article.user == current_user %>
+              <% if logged_in? && (@article.user == current_user ||current_user.admin?) %>
                 <%= link_to 'edit', edit_article_path(@article),class: "btn btn-success mt-2" %> </h2>
                 <%= link_to 'Delete', article_path(@article), class:"btn btn-danger mt-2", method: :delete, data:{confirm:"are you sure?" } %> </h2>
               <% end %>

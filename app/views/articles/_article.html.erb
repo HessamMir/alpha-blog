@@ -17,7 +17,7 @@
               <%= link_to 'show', article_path(article),class: "btn btn-outline-info mt-2" %> </td>
               <%# here i made an if statement so that if the user is logged in and the user who the article
               was made is = to the current user logged in, they will be able to edit or delete the article %>
-              <% if logged_in? && article.user == current_user %>
+              <% if logged_in? && (article.user == current_user || current_user.admin?) %>
                 <%= link_to 'edit', edit_article_path(article),class: "btn btn-success mt-2" %> </h2>
                 <%= link_to 'Delete', article_path(article), class:"btn btn-danger mt-2", method: :delete, data:{confirm:"are you sure?" } %> </h2>
               <% end %>      
