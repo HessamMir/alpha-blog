@@ -10,6 +10,14 @@
             <%#this is the image, which is found via the specific user @article.user, if it is clicked
             it will take the person to the users profile  %>
             <%= link_to gravatar_for(@article.user), user_path(@article.user) %>
+            <% if @article.categories.any? %>
+           
+            <div class = "mt-2">
+              <%= render @article.categories %>
+            </div>
+
+
+            <% end %>
             </div>
             <div class="card-body">
               <%# here we have the full description shown in a simple format which displays from left to right  %>
