@@ -1,19 +1,16 @@
 require 'test_helper'
 
-class SignupUsersTest < ActionDispatch::IntegrationTest
- #create article
- #signup
- 
+class SignupUserTest < ActionDispatch::IntegrationTest
 
-  test "get new signup form and create user" do
-    get "/signup" 
-    assert_response :success
+  test "signup new user to blog" do
+    get signup_path
+    assert_template 'users/new'
     assert_difference 'User.count', 1 do
-      post users_path params: { user: { username: "hassanmir", email: "hassanmir@hotmail.com", 
-      password: "password"} }
-      
-       
-     end
-     
-end
+      post users_path, params: {user: {username: "john", email: "john@exapmle.com", password: "password"}}
+      follow_redirect!
+    end
+    assert_template 'users/show'
+    assert_select 'a', "Log out"
+  end
+
 end

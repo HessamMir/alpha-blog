@@ -1,24 +1,20 @@
 require 'test_helper'
 
-class NewArticleTest < ActionDispatch::IntegrationTest
-    setup do
-      @admin_user = User.create(username: "hassanmir", email: "hassanmir@hotmail.com", 
-      password: "password", admin: true)
-      sign_in_as(@admin_user)
-  end
-
-  test "get new article form and create article" do
-    get "/articles/new"
-    assert_response :success
-    assert_difference 'Article.count', 1 do
-      post articles_path, params: { article: { title: " hessamd", description: "hessam testing",
-       category_ids: [4,5] } }
-      assert_response :redirect
+  class CreateArticleTest < ActionDispatch::IntegrationTest
+    def setup
+      @user = User.create(username:"john", email:"john@example.com", password:"password")
     end
-    follow_redirect!
-    assert_response :success
-    assert_match article_path ,response.body
-    
-  end
 
-end
+    test "create new article as logged user" do
+      sign_in_as(@user, "password")
+      get new_article_path
+      assert_template 'articles/new'
+      assert_difference "Article.count", 1 do
+        post articles_path, params: {article: {title: "Test title", description: "This is test description"}}
+        follow_redirect!
+      end
+      assert_template 'articles/show'
+      assert_select 'h2', text: "Test title"
+    end
+
+  end
