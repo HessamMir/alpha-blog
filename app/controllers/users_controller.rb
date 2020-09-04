@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       #the hashtage is what will be displayed as a print function in this case its the users username.
       flash[:notice] = "welcome #{@user.username}, you have succesfully signed up!"
-      redirect_to articles_path
+      redirect_to users_path
     else
       render 'new'
   end
